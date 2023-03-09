@@ -303,7 +303,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-1e815a84.png" class="logo" alt="" />
+      <img src="images/logo-0ff4a63e.svg" class="logo" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
@@ -319,16 +319,13 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#tokens" class="toc-h1 toc-link" data-title="Tokens">Tokens</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#get-all-tokens" class="toc-h2 toc-link" data-title="Get All Tokens">Get All Tokens</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#get-a-specific-token-info" class="toc-h2 toc-link" data-title="Get a Specific Token Info">Get a Specific Token Info</a>
                   </li>
                   <li>
                     <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
@@ -348,79 +345,150 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the XRPL.to API! You can use our API to access XRPL.to API endpoints, which can get information on various tokens&#39; metrics in our database.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>We have language bindings in Shell and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<h1 id='tokens'>Tokens</h1><h2 id='get-all-tokens'>Get All Tokens</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.xrpl.to/api/tokens?start=0&amp;limit=20&amp;sortBy=vol24hxrp&amp;sortType=desc&amp;filter="</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
 
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://api.xrpl.to/api/tokens%27'</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"start"</span> <span class="o">=&gt;</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="s2">"limit"</span> <span class="o">=&gt;</span> <span class="s2">"100"</span><span class="p">,</span>
+  <span class="s2">"sortBy"</span> <span class="o">=&gt;</span> <span class="s2">"vol24hxrp"</span><span class="p">,</span>
+  <span class="s2">"sortType"</span> <span class="o">=&gt;</span> <span class="s2">"desc"</span><span class="p">,</span>
+  <span class="s2">"filter"</span> <span class="o">=&gt;</span> <span class="s2">""</span>
+<span class="p">}</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="n">uri</span><span class="p">.</span><span class="nf">query</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<span class="n">res</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">get_response</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.xrpl.to/api/tokens"</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"start"</span><span class="p">:</span> <span class="s">"0"</span><span class="p">,</span>
+    <span class="s">"limit"</span><span class="p">:</span> <span class="s">"100"</span><span class="p">,</span>
+    <span class="s">"sortBy"</span><span class="p">:</span> <span class="s">"vol24hxrp"</span><span class="p">,</span>
+    <span class="s">"sortType"</span><span class="p">:</span> <span class="s">"desc"</span><span class="p">,</span>
+    <span class="s">"filter"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">}</span>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s2">`https://api.xrpl.to/api/tokens?start=0&amp;limit=100&amp;sortBy=vol24hxrp&amp;sortType=desc&amp;filter=`</span><span class="p">);</span>
 
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">tokens</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"took"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18.70"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"exch"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"USD"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.559408291448575</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"EUR"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6770493364433525</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"JPY"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.045246821410082315</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"CNY"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3705075954057058</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+  </span><span class="nl">"H24"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"METRICS_24H"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"activeAddresses24H"</span><span class="p">:</span><span class="w"> </span><span class="mi">12290</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tradedTokens24H"</span><span class="p">:</span><span class="w"> </span><span class="mi">447</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tradedXRP24H"</span><span class="p">:</span><span class="w"> </span><span class="mf">3565973.664622</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactions24H"</span><span class="p">:</span><span class="w"> </span><span class="mi">15546</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"global"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"METRICS_GLOBAL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gDexVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">3565973.664622</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gDexVolumePro"</span><span class="p">:</span><span class="w"> </span><span class="mf">-18.842402030897333</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gMarketcap"</span><span class="p">:</span><span class="w"> </span><span class="mf">120827548.02265854</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gMarketcapPro"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.12402123412199728</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gScamVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">87.23683099999998</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gScamVolumePro"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.002446367786320914</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gStableVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">490506.24331000005</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gStableVolumePro"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.755184121977937</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gXRPdominance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gXRPdominancePro"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">8416</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">8416</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tagName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sortBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vol24hxrp"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sortType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"desc"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filter"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tokens"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0413ca7cfc258dfaf698c02fe304e607"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"md5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0413ca7cfc258dfaf698c02fe304e607"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"399211088.84308900115"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"534F4C4F00000000000000000000000000000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-12-07"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dateon"</span><span class="p">:</span><span class="w"> </span><span class="mi">1654094361537</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sologenic.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"holders"</span><span class="p">:</span><span class="w"> </span><span class="mi">237778</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsoLo2S1kiGeCcn6hCUXVrCpGMWLrRrLZz"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"kyc"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"offers"</span><span class="p">:</span><span class="w"> </span><span class="mi">5913</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"social"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"twitter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"realSologenic"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"facebook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"realsologenic"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"linkedin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"realsologenic"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"instagram"</span><span class="p">:</span><span class="w"> </span><span class="s2">"realsologenic"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"telegram"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoinFieldCHAT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"discord"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uSdE6tS67B"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"youtube"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c/GoSOLOTV"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"medium"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@sologenic"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tiktok"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@sologenic.official"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reddit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"r/Sologenic"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"trustlines"</span><span class="p">:</span><span class="w"> </span><span class="mi">288429</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"urlSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sologenic-solo"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sologenic"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"imgExt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOLO"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Payment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Market"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Collectables &amp; NFTs"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Tokenized Stocks"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"whitepaper"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.sologenic.com/downloads/sologenic-whitepaper.pdf"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"exch"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.41949763333333334</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"marketcap"</span><span class="p">:</span><span class="w"> </span><span class="mf">68304369.66850857</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maxMin24h"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mf">0.19057847838771405</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.15721754517708283</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"p24h"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.02042820490359476</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"p7d"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.02816231645870154</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pro24h"</span><span class="p">:</span><span class="w"> </span><span class="mf">-12.463507027255588</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pro7d"</span><span class="p">:</span><span class="w"> </span><span class="mf">-17.182186625955396</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vol24h"</span><span class="p">:</span><span class="w"> </span><span class="mf">3358118.9322646316</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vol24htx"</span><span class="p">:</span><span class="w"> </span><span class="mi">4123</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vol24hx"</span><span class="p">:</span><span class="w"> </span><span class="mf">3345545.1935411547</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vol24hxrp"</span><span class="p">:</span><span class="w"> </span><span class="mf">1454435.640453</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"supply"</span><span class="p">:</span><span class="w"> </span><span class="s2">"399211088.84308900115"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"usd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.16390414719486037532"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1678372110000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lines"</span><span class="p">:</span><span class="w"> </span><span class="mi">288434</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves tokens.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><code>GET https://api.xrpl.to/api/tokens?start=0&amp;limit=20&amp;sortBy=vol24hxrp&amp;sortType=desc&amp;filter=</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -430,21 +498,31 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>start</td>
+<td>0</td>
+<td>start value for pagination.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>limit</td>
+<td>100</td>
+<td>limit count value for pagination.(100&gt;limit&gt;1)</td>
+</tr>
+<tr>
+<td>sortBy</td>
+<td>vol24hxrp</td>
+<td>Can be one of these values: name, exch, pro24h, pro7d, vol24hxrp, vol24htx, marketcap, trustlines, supply</td>
+</tr>
+<tr>
+<td>sortType</td>
+<td>desc</td>
+<td>Ascending or Descending</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+The parameter amount in JSON object is Total Supply value, supply is Circulating Supply Value.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='get-a-specific-token-info'>Get a Specific Token Info</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
