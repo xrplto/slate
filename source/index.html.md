@@ -643,3 +643,101 @@ It returns the metrics of 24 hours and Global, and the current exchange rates co
 
 `GET https://api.xrpl.to/api/status`
 
+## Get Account Offers
+
+```shell
+#!/bin/bash
+
+account="your_account"
+
+url="https://api.xrpl.to/api/account/$account"
+
+response=$(curl -s "$url")
+
+offers=$(echo "$response" | jq -r '.data.offers')
+
+echo "$offers"
+
+```
+
+```ruby
+require 'httparty'
+
+url = "https://api.xrpl.to/api/account/offers/#{account}"
+res = HTTParty.get(url)
+offers = res.parsed_response["offers"]
+
+```
+
+```python
+import requests
+
+url = f"https://api.xrpl.to/api/account/offers?account={account}"
+res = requests.get(url)
+offers = res.json()["offers"]
+
+```
+
+```javascript
+const axios = require('axios');
+
+const res = await axios.get(`https://api.xrpl.to/api/account/offers/${account}`);
+
+const offers = res.data.offers;
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "result": "success",
+  "took": "0.66",
+  "offers": [
+    {
+      "_id": "r22G1hNbxBVapj2zSmvjdXyKcedpSDKsm_71158478",
+      "account": "r22G1hNbxBVapj2zSmvjdXyKcedpSDKsm",
+      "seq": 71158478,
+      "flags": 0,
+      "gets": {
+        "issuer": "XRPL",
+        "currency": "XRP",
+        "name": "XRP",
+        "value": "5"
+      },
+      "pays": {
+        "issuer": "rLpunkscgfzS8so59bUCJBVqZ3eHZue64r",
+        "currency": "4C656467657250756E6B73000000000000000000",
+        "name": "LedgerPunks",
+        "value": "5000"
+      },
+      "pair": "1e766311a6e689cd7225b5923ed5811c"
+    },
+    {
+      "_id": "r22G1hNbxBVapj2zSmvjdXyKcedpSDKsm_71158480",
+      "account": "r22G1hNbxBVapj2zSmvjdXyKcedpSDKsm",
+      "seq": 71158480,
+      "flags": 0,
+      "gets": {
+        "issuer": "XRPL",
+        "currency": "XRP",
+        "name": "XRP",
+        "value": "0.1"
+      },
+      "pays": {
+        "issuer": "rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq",
+        "currency": "USD",
+        "name": "USD",
+        "value": "10"
+      },
+      "pair": "cbc59334e97433099b050dad5dcb0318"
+    }
+  ]
+}
+```
+
+This endpoint retrieves all offers of the account.
+
+### HTTP Request
+
+`GET https://api.xrpl.to/api/account/offers/${account}`
+
